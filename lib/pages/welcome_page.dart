@@ -19,7 +19,7 @@ class _WelcomepageState extends State<Welcomepage> {
         child: TextButton(
           onPressed: () {
             setState(() {
-              if (enteredPin.length < 5) {
+              if (enteredPin.length < 4) {
                 enteredPin += number.toString();
               }
             });
@@ -40,9 +40,20 @@ class _WelcomepageState extends State<Welcomepage> {
           padding: EdgeInsets.symmetric(horizontal: 25),
           physics: BouncingScrollPhysics(),
           children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SizedBox(
+                height: 300,
+                width: 100,
+                child: Image.asset(
+                  'images/sidebar_image.png',
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
             Center(
               child: Text(
-                "Entrez votre Code PIN",
+                "Entrez votre code Pin",
                 style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
               ),
             ),
@@ -54,19 +65,19 @@ class _WelcomepageState extends State<Welcomepage> {
               children: [
                 Row(
                   children: List.generate(
-                    5,
+                    4,
                     (index) {
                       return Container(
                           margin: const EdgeInsets.all(6),
                           height: isPinVisible ? 50 : 16,
                           width: isPinVisible ? 50 : 16,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7),
+                            borderRadius: BorderRadius.circular(5),
                             color: index < enteredPin.length
                                 ? isPinVisible
-                                    ? Colors.blueGrey
+                                    ? const Color.fromARGB(255, 13, 155, 226)
                                     : CupertinoColors.activeBlue
-                                : CupertinoColors.activeBlue.withOpacity(0.1),
+                                : CupertinoColors.systemGrey.withOpacity(0.1),
                           ),
                           child: isPinVisible && index < enteredPin.length
                               ? Center(
@@ -93,7 +104,7 @@ class _WelcomepageState extends State<Welcomepage> {
               ],
             ),
             SizedBox(
-              height: isPinVisible ? 50 : 8,
+              height: isPinVisible ? 30 : 8,
             ),
            
            //DigitNumber
@@ -134,27 +145,34 @@ class _WelcomepageState extends State<Welcomepage> {
                   ]
                 ),
               ),
-
-              
-                    Container(
-                      decoration: BoxDecoration(
-                        color:const Color(0xFF2D70E3),
-                        borderRadius: BorderRadius.circular(5)
-                      ),
-                      height: 50,
-                      width:MediaQuery.of(context).size.width/2,
-                      margin: EdgeInsets.symmetric(vertical: 24),
-                      child: TextButton(
-                        onPressed: (){
-                          setState((){
-                            enteredPin = "";
-                          });
-                        },
-                        child:Text("EFFACER",style: TextStyle(
-                          color:Colors.white24,fontSize: 32, fontWeight: FontWeight.w100),
-                        )
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Container(
+                  decoration: BoxDecoration(
+                          color:const Color(0xFF2D70E3),
+                          borderRadius: BorderRadius.circular(5)
                         ),
-                    )
+                        height: 50,
+                        width:MediaQuery.of(context).size.width*2/3,
+                        margin: EdgeInsets.symmetric(vertical: 24),
+                        child: TextButton(
+                          onPressed: (){
+                            setState((){
+                              enteredPin = "";
+                            });
+                          },
+                          child:Text("EFFACER",style: TextStyle(
+                            color:Colors.white,fontSize: 20, fontWeight: FontWeight.w700),
+                          )
+                          ),
+                      ),
+              ),
+              Row(children: [
+                TextButton.icon(
+                  onPressed: (){},
+                  label: Text("Parametre"),
+                  icon: Icon(Icons.settings_input_antenna),)
+              ],)
           ],
         ),
       ),
