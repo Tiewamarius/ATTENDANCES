@@ -1,8 +1,11 @@
 import 'package:attendances/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(GetMaterialApp(
+    home: MyApp(), // Replace MyApp with your app's main widget
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const Welcomepage(),
+      home: const Welcom_Page(),
     );
   }
 }

@@ -1,28 +1,75 @@
 // ignore: file_names
+import 'package:attendances/pages/auth/authPages.dart';
+import 'package:attendances/pages/auth/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class Welcomepage extends StatefulWidget {
-  const Welcomepage({super.key});
+class Welcom_Page extends StatefulWidget {
+  const Welcom_Page({super.key});
 
   @override
-  State<Welcomepage> createState() => _WelcomepageState();
+  State<Welcom_Page> createState() => _Welcom_PageState();
 }
 
-class _WelcomepageState extends State<Welcomepage> {
+class _Welcom_PageState extends State<Welcom_Page> {
   String enteredPin = "";
   bool isPinVisible = false;
+  String getFormattedTime(){
+    DateTime now=DateTime.now();
+    return '${now.hour}H:${now.minute}';
+  }
 
   Widget numButton(int number) {
     return Padding(
-        padding: EdgeInsets.only(top: 16),
+        padding: EdgeInsets.only(top: 1),
         child: TextButton(
           onPressed: () {
             setState(() {
               if (enteredPin.length < 4) {
                 enteredPin += number.toString();
               }
+
+              if (enteredPin.length == 4) {
+                showDialog(context: context, builder: (context) =>AlertDialog(
+
+                  title: Center(child: Row(
+                    children: [
+                      Text('Bienvenue:'),
+                      SizedBox(width:15),
+                      Text(getFormattedTime(),style:TextStyle(
+                            color:  Colors.green,fontWeight: FontWeight.w700
+                          ))
+                    ],
+                  )),
+                  content: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Observation OU motif de retard'
+                    ),
+                  ),
+                  actions: [
+                    Container(
+                      width: 150,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(50)
+                      ),
+                      child: TextButton(
+                          onPressed: (){
+                            print("Vous arrrivé à ${getFormattedTime()}");
+
+                          },
+                          child: Text('VALIDE',style:TextStyle(
+                            color: Colors.white,fontWeight: FontWeight.w700
+                          ))
+                      ),
+                    ),
+                  ],
+                )
+                );
+              }
             });
+
           },
           child: Text(
             number.toString(),
@@ -41,20 +88,20 @@ class _WelcomepageState extends State<Welcomepage> {
           physics: BouncingScrollPhysics(),
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(15.0),
               child: SizedBox(
-                height: 300,
-                width: 100,
+                height: 250,
+                width: 120,
                 child: Image.asset(
-                  'images/sidebar_image.png',
+                  'images/Login.png',
                   fit: BoxFit.contain,
                 ),
               ),
             ),
             Center(
               child: Text(
-                "Entrez votre code Pin",
-                style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
+                "ENTRER VOTRE CODE",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
               ),
             ),
             SizedBox(
@@ -83,7 +130,7 @@ class _WelcomepageState extends State<Welcomepage> {
                               ? Center(
                                   child: Text(enteredPin[index],
                                       style: TextStyle(
-                                        fontSize: 17,
+                                        fontSize: 20,
                                         color: CupertinoColors.systemBlue,
                                         fontWeight: FontWeight.w700,
                                       )),
@@ -106,23 +153,28 @@ class _WelcomepageState extends State<Welcomepage> {
             SizedBox(
               height: isPinVisible ? 30 : 8,
             ),
-           
            //DigitNumber
             for (var i = 0; i < 3; i++)
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
+                padding: EdgeInsets.symmetric(horizontal: 55),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: List.generate(
                     3,
-                    (index) => numButton(1 + 3 * i + index),
+                    (index) => Container(
+                      margin: EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        borderRadius:BorderRadius.circular(15) ,
+                        color: Colors.grey,),
+
+                        child: numButton(1 + 3 * i + index)),
                   ).toList(),
                 ),
               ),
 
               // 0 digit and backspace
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
+                padding: EdgeInsets.symmetric(horizontal: 55),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children:[
@@ -146,7 +198,7 @@ class _WelcomepageState extends State<Welcomepage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24),
+                padding: EdgeInsets.symmetric(horizontal: 55),
                 child: Container(
                   decoration: BoxDecoration(
                           color:const Color(0xFF2D70E3),
@@ -167,15 +219,22 @@ class _WelcomepageState extends State<Welcomepage> {
                           ),
                       ),
               ),
-              Row(children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
                 TextButton.icon(
-                  onPressed: (){},
-                  label: Text("Parametre"),
-                  icon: Icon(Icons.settings_input_antenna),)
+                  onPressed:(){
+                    Get.to(AuthPages());
+                  },
+                  label: Text("Paramètre",style: TextStyle(
+                      color:Colors.blueGrey,fontSize: 25, fontWeight: FontWeight.w700),
+                  ),
+                  icon: Icon(Icons.settings_input_antenna,size: 25,color: Colors.red,),)
               ],)
           ],
         ),
       ),
     );
+
   }
 }
