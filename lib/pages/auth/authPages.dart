@@ -16,46 +16,84 @@ class _AuthPagesState extends State<AuthPages> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          TextButton.icon(
-            onPressed: () {
-              Get.to(Login());
-            },
-            label: Text(
-              "LOGIN",
-              style: TextStyle(
-                  color: Colors.blueGrey,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w700),
-            ),
-            icon: Icon(
-              Icons.lock_clock,
-              size: 25,
-              color: Colors.red,
-            ),
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 250,
+                width: 200,
+                child: Image.asset(
+                  'images/Admin.png',
+                  fit: BoxFit.contain,
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton.icon(
+                          onPressed: () {
+                            Get.to(Login());
+                          },
+                          label: Text(
+                            "MON ESPACE",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue, // Background color
+                            foregroundColor: Colors.white, // Text color
+                            textStyle: TextStyle(fontSize: 16), // Text style
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12), // Padding
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(8.0), // Rounded corners
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        TextButton.icon(
+                          onPressed: () {
+                            Get.to(Register());
+                          },
+                          label: Text(
+                            "CREER COMPTE",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue, // Background color
+                            foregroundColor: Colors.white, // Text color
+                            textStyle: TextStyle(fontSize: 16), // Text style
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 12), // Padding
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(8.0), // Rounded corners
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          SizedBox( width: 25,),
-          TextButton.icon(
-            onPressed: () {
-              Get.to(Register());
-            },
-            label: Text(
-              "REGISTER",
-              style: TextStyle(
-                  color: Colors.blueGrey,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w700),
-            ),
-            icon: Icon(
-              Icons.pending_actions_sharp,
-              size: 25,
-              color: Colors.red,
-            ),
-          ),
-        ],
-      ),),
+        ),
+      ),
     );
   }
 }
